@@ -2,9 +2,10 @@
 #define MYOBJ_H
 
 class myobj{
-  public:
+private:
     int *p;
     int l;
+  public:
     myobj(int);
     void show_l();
     void input();
