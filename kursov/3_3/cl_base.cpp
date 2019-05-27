@@ -1,7 +1,4 @@
-#include "lib.h"
-// #define SIGNAL_D(signal_f) ((void (*)(string))(&(signal_f)))
-// #define HENDLER_D(hendler_f) ((void (*)(cl_base *, string))(&(hendler_f)))
-
+#include "cl_base.h"
 cl_base ::cl_base(cl_base *p_parent) {
   set_object_name("cl_base");
 
@@ -14,6 +11,7 @@ cl_base ::cl_base(cl_base *p_parent) {
 void cl_base ::set_object_name(string object_name) {
   this->object_name = object_name;
 }
+string cl_base ::get_object_name() { return object_name; }
 
 void cl_base ::set_parent(cl_base *p_parent) {
   if (p_parent) {
@@ -149,62 +147,4 @@ void cl_base::emit_signal(void (*p_signal)(string &), string &s_command) {
     it_connects++;
   }
 }
-void application::init() {}
-void application::exec() {
-  p_write->first_output(file);
-  int a, b;
-  string c;
-  cin >> a >> b >> c;
-  while (a != 0 && b != 0) {
-    p_set->set(file, a, b, c);
-    cin >> a >> b >> c;
-  }
-}
-void hendler(write_to_file *p_ob, fstream &file, string &command) {
-  p_ob->write_to_position(file, command);
-}
-void set_position::set(fstream &file, int a, int b, string c) {
-  if ((a >= 1 && a <= 10) && (b >= 1 && b <= 10)) {
-    file.seekp(20 * a + b - 1, ios_base::cur);
-    // emit_signal(correct_position(), file, c);
-  } else {
-    file.seekp(0, ios_base::end);
-    file << "Coordinate is wrong (" << a << ',' << b << ")\n";
-  }
-}
-void write_to_file::write_to_position(fstream &file, string &command) {
-  if ((command >= "a" && command <= "z") ||
-      (command >= "A" && command <= "Z")) {
-    file << command;
-  } else {
-    file.seekp(0, ios_base::end);
-    file << "Not the letter of the Latin alphbet\n";
-  }
-}
-void write_to_file::first_output(fstream &file) {
-  for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-      file << "8";
-      if (j != 9)
-        file << " ";
-    }
-    file << endl;
-  }
-}
-// void cl_application ::show_object_state() { show_state_next(this); }
-// void cl_application ::show_state_next(cl_base *ob_parent) {
-//   if (ob_parent->get_state() == 1) {
-//       cout << "The object " << ob_parent->get_object_name() << " is ready"
-//            << endl;
-//   } else {
-//       cout << "The object " << ob_parent->get_object_name() << " is not
-//     ready"
-//            << endl;
-//   }
-//     if (ob_parent->children.size() == 0) return;
-//     ob_parent->it_child = ob_parent->children.begin();
-//     while (ob_parent->it_child != ob_parent->children.end()) {
-//       show_state_next((*(ob_parent->it_child)));
-//       ob_parent->it_child++;
-//   }
-// }
+void cl_base::set_state(int a) { state = a; }

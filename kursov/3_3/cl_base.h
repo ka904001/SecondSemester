@@ -1,3 +1,6 @@
+#ifndef CL_BASE_H
+#define CL_BASE_H
+
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -22,12 +25,13 @@ public:
   void set_parent(cl_base *p_parent);
   void add_child(cl_base *p_child);
   void delete_child(string object_name);
+  void set_state(int);
   cl_base *get_child(string object_name);
   cl_base *get_object_root();
   cl_base *get_object(string object_path);
   vector<cl_base *> children; // ссылки на потомков
   vector<cl_base *>::iterator it_child;
-
+  int state;
 private:
   struct o_sh {
     cl_base *p_cl_base;
@@ -38,25 +42,4 @@ private:
   string object_name; // наименование объекта
   cl_base *p_parent;  // ссылка на головной объект
 };
-class set_position : public cl_base {
-public:
-  void set(fstream &, int, int, string);
-  void correct_position();
-};
-void hendler(cl_base *, fstream &, string &);
-class write_to_file : public cl_base {
-public:
-  void first_output(fstream &);
-  void write_to_position(fstream &, string &);
-};
-
-class application : public cl_base {
-public:
-  void init();
-  void exec();
-  fstream file;
-
-private:
-  set_position *p_set;
-  write_to_file *p_write;
-};
+#endif
