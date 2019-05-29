@@ -149,7 +149,13 @@ void cl_base::emit_signal(void (*p_signal)(string &), string &s_command) {
     it_connects++;
   }
 }
-void application::init() {}
+void application::init() {
+  p_set = new set_position;
+  p_write = new write_to_file;
+  string command;
+  file.open("field.txt", ios::out);
+  p_set->set_connect((p_set->correct_position()), p_write, (hendler()));
+}
 void application::exec() {
   p_write->first_output(file);
   int a, b;
@@ -166,7 +172,7 @@ void hendler(write_to_file *p_ob, fstream &file, string &command) {
 void set_position::set(fstream &file, int a, int b, string c) {
   if ((a >= 1 && a <= 10) && (b >= 1 && b <= 10)) {
     file.seekp(20 * a + b - 1, ios_base::cur);
-    // emit_signal(correct_position(), file, c);
+    emit_signal(correct_position(), file, c);
   } else {
     file.seekp(0, ios_base::end);
     file << "Coordinate is wrong (" << a << ',' << b << ")\n";

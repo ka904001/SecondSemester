@@ -1,0 +1,13 @@
+8 8 8 8 8 8 8 8 8 8
+8 8 8 P 8 8 8 8 8 8
+d 8 8 8 8 8 8 O 8 8
+8 8 8 8 N 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8
+8 8 8 8 8 8 8 8 8 8
+Not a letter of the Latin alphabet: 8
+Coordinate is wrong (10,11)
+Coordinate is wrong (14,8)
