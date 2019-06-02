@@ -1,5 +1,7 @@
 #include "cl_write.h"
-void cl_write::hendler_pos_secure(cl_base *p_ob, char &c) {
+void cl_write::hendler_pos_secure(cl_base *p_ob, stringstream &stream) {
+  char c;
+  stream>>c;
   if ((c > 'a' && c < 'z') || (c > 'A' && c < 'Z')) {
     ((p_ob->get_root())->get_stream()) << c;
   } else {

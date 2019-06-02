@@ -5,8 +5,8 @@
 
 class cl_pos : public cl_base {
 public:
-  void work_position(int &, int &, char &);
-  static void position_secure(char &){};
+  static void hendler_valid_input(stringstream &);
+  static void position_secure(stringstream &){};
 };
 
 #endif

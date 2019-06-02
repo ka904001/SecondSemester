@@ -9,8 +9,6 @@ void cl_application::initial_output() {
   for (int i = 0; i < 10; i++) {
     for (int j = 0; j < 10; j++) {
       get_stream() << '8';
-      if (j != 9)
-        get_stream() << ' ';
     }
     if (i != 9)
       get_stream() << endl;
@@ -34,16 +32,21 @@ void cl_application::bild_tree_objects() {
 int cl_application::exec_app() {
   set_stream();
   initial_output();
+  stringstream stream;
   int a, b;
   char c;
   cin >> a >> b >> c;
-
+  stream.str("");
+  stream<<a<<' '<<b<<' '<<c;
+  this->set_connect(SIGNAL_D(this->valid_input), p_ob_position, HENDLER_D(p_ob_position->hendler_valid_input));
   p_ob_position->set_connect(SIGNAL_D(p_ob_position->position_secure),
                              p_ob_write,
                              HENDLER_D(p_ob_write->hendler_pos_secure));
   while (a != 0 && b != 0) {
-    p_ob_position->work_position(a, b, c);
+    emit_signal(SIGNAL_D(valid_input), stream);
     cin >> a >> b >> c;
+    stream.str("");
+    stream<<a<<' '<<b<<' '<<c;
   }
   p_ob_console->out_to_console();
   return 0;

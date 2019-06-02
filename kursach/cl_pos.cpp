@@ -1,10 +1,12 @@
 #include "cl_pos.h"
 
-void cl_pos::work_position(int &a, int &b, char &c) {
+void cl_pos::hendler_valid_input(stringstream &stream) {
+  int a, b;
+  stream>>a>>b;
   if ((a > 0 && a < 11) && (b > 0 && b < 11)) {
     ((get_root())->get_stream())
         .seekp(2 * (b - 1) + 20 * (a - 1), ios_base::beg);
-    emit_signal(SIGNAL_D(position_secure), c);
+    emit_signal(SIGNAL_D(position_secure), stream);
   } else {
     ((get_root())->get_stream()).seekp(0, ios_base::end);
     ((get_root())->get_stream())

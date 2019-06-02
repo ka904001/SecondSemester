@@ -5,7 +5,7 @@
 
 class cl_write : public cl_base {
 public:
-  static void hendler_pos_secure(cl_base *, char &);
+  static void hendler_pos_secure(cl_base *, stringstream &);
 };
 
 #endif

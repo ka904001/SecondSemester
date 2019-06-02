@@ -15,6 +15,7 @@ public:
   void bild_tree_objects();
   void initial_output();
   int exec_app();
+  static void valid_input(stringstream &);
 
 private:
   cl_pos *p_ob_position;

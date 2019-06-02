@@ -1,15 +1,16 @@
 #include "cl_base.h"
 #include <string>
 #include <vector>
+#include <sstream>
 using namespace std;
 
 fstream &cl_base::get_stream() { return file; }
 
 void cl_base::set_stream() { file.open("field.txt", ios_base::out); }
 
-void cl_base::set_connect(void (*p_signal)(char &), cl_base *p_ob_hendler,
-                          void (*p_hendler)(cl_base *, char &)) {
-  void (*p_key)(char &);
+void cl_base::set_connect(void (*p_signal)(stringstream &), cl_base *p_ob_hendler,
+                          void (*p_hendler)(cl_base *, stringstream &)) {
+  void (*p_key)(stringstream &);
   o_sh *p_value;
   if (connects.size() > 0) {
     it_connects = connects.begin();
@@ -27,8 +28,8 @@ void cl_base::set_connect(void (*p_signal)(char &), cl_base *p_ob_hendler,
   p_value->p_hendler = p_hendler;
   connects.insert({p_signal, p_value});
 }
-void cl_base::emit_signal(void (*p_signal)(char &), char &s_command) {
-  void (*p_hendler)(cl_base * p_ob, char &);
+void cl_base::emit_signal(void (*p_signal)(stringstream &), stringstream &s_command) {
+  void (*p_hendler)(cl_base * p_ob, stringstream &);
   if (connects.empty())
     return;
   if (connects.count(p_signal) == 0)
